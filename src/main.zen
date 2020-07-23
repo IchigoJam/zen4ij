@@ -1,0 +1,27 @@
+const ij = @import("std15.zen");
+
+export fn main() i32 {
+    ij.cls();
+    var x: i32 = 15;
+    var score: i32 = 0;
+    while (true) {
+        ij.locate(x, 5);
+        ij.putc(236);
+        ij.locate(ij.rnd(32), 23);
+        ij.putc('*');
+        ij.putc(10);
+        ij.wait(3);
+        const c = ij.inkey();
+        if (c == 28) {
+            x -= 1;
+        }
+        if (c == 29) {
+            x += 1;
+        }
+        if (ij.scr(x, 5) != 0) {
+            break;
+        }
+        score += 1;
+    }
+    return score;
+}

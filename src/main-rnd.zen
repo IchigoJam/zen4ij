@@ -1,0 +1,5 @@
+const ij = @import("std15.zen");
+
+export fn main(param: i32) i32 {
+  return ij.rnd(param);
+}

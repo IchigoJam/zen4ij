@@ -1,0 +1,135 @@
+pub fn rnd(x: i32) i32 {
+    const addr = @intToPtr(*u16, 0xC0);
+    const f = @intToPtr(fn(i32) i32, addr.*);
+    return f(x);
+}
+
+pub fn sin(x: i32) i32 {
+    const addr = @intToPtr(*u16, 0xC2);
+    const f = @intToPtr(fn(i32) i32, addr.*);
+    return f(x);
+}
+
+pub fn putc(x: u8) void {
+    const addr = @intToPtr(*u16, 0xC4);
+    const f = @intToPtr(fn(u8) void, addr.*);
+    f(x);
+}
+
+pub fn putnum(x: i32) void {
+    const addr = @intToPtr(*u16, 0xC6);
+    const f = @intToPtr(fn(i32) void, addr.*);
+    f(x);
+}
+
+pub fn putstr(x: []u8) void {
+    const addr = @intToPtr(*u16, 0xC8);
+    const f = @intToPtr(fn([]u8) void, addr.*);
+    f(x);
+}
+
+pub fn inkey() i32 {
+    const addr = @intToPtr(*u16, 0xCA);
+    const f = @intToPtr(fn() i32, addr.*);
+    return f();
+}
+
+pub fn cls() void {
+    const addr = @intToPtr(*u16, 0xCC);
+    const f = @intToPtr(fn() void, addr.*);
+    f();
+}
+
+pub fn locate(x: i32, y: i32) void {
+    const addr = @intToPtr(*u16, 0xCE);
+    const f = @intToPtr(fn(i32, i32) void, addr.*);
+    f(x, y);
+}
+
+pub fn scr(x: i32, y: i32) i32 {
+    const addr = @intToPtr(*u16, 0xD0);
+    const f = @intToPtr(fn(i32, i32) i32, addr.*);
+    return f(x, y);
+}
+
+pub fn pset(x: i32, y: i32) void {
+    const addr = @intToPtr(*u16, 0xD2);
+    const f = @intToPtr(fn(i32, i32) void, addr.*);
+    f(x, y);
+}
+
+pub fn scroll(x: i32) void {
+    const addr = @intToPtr(*u16, 0xD4);
+    const f = @intToPtr(fn(i32) void, addr.*);
+    f(x);
+}
+
+pub fn wait(x: i32) void {
+    const addr = @intToPtr(*u16, 0xD6);
+    const f = @intToPtr(fn(i32) void, addr.*);
+    f(x);
+}
+
+pub fn out(x: i32, y: i32) void {
+    const addr = @intToPtr(*u16, 0xD8);
+    const f = @intToPtr(fn(i32, i32) void, addr.*);
+    f(x, y);
+}
+
+pub fn in() i32 {
+    const addr = @intToPtr(*u16, 0xDA);
+    const f = @intToPtr(fn() i32, addr.*);
+    return f();
+}
+
+pub fn pwm(x: i32, y: i32, z: i32) void {
+    const addr = @intToPtr(*u16, 0xDC);
+    const f = @intToPtr(fn(i32, i32, i32) void, addr.*);
+    f(x, y, z);
+}
+
+pub fn ana(x: i32) i32 {
+    const addr = @intToPtr(*u16, 0xDE);
+    const f = @intToPtr(fn(i32) i32, addr.*);
+    return f(x);
+}
+
+pub fn uputc(x: i32) void {
+    const addr = @intToPtr(*u16, 0xE0);
+    const f = @intToPtr(fn(i32) void, addr.*);
+    f(x);
+}
+
+pub fn memclear(dst: []u8, len: i32) void {
+    const addr = @intToPtr(*u16, 0xE4);
+    const f = @intToPtr(fn([]u8, i32) void, addr.*);
+    f(dst, len);
+}
+
+pub fn memcpy(dst: []u8, src: []u8,len: i32) void { // src : const
+    const addr = @intToPtr(*u16, 0xE6);
+    const f = @intToPtr(fn([]u8, []u8, i32) void, addr.*);
+    f(dst, src, len);
+}
+
+pub fn flash1(cmd: i32, startsector: i32, endsector:  i32) i32 {
+    const addr = @intToPtr(*u16, 0xE8);
+    const f = @intToPtr(fn(i32, i32, i32) i32, addr.*);
+    return f(cmd, startsector, endsector);
+}
+
+pub fn flash2(cmd: i32, src: []u8, dst: []u8,len: i32) i32 { // src, dst const
+    const addr = @intToPtr(*u16, 0xEA);
+    const f = @intToPtr(fn(i32, []u8, []u8, i32) i32, addr.*);
+    return f(cmd, src, dst, len);
+}
+
+pub fn ws_led(countrepeat: i32, data: []u8, gpiomask: i32) void {
+    const addr = @intToPtr(*u16, 0xEE);
+    const f = @intToPtr(fn(i32, []u8, i32) void, addr.*);
+    f(countrepeat, data, gpiomask);
+}
+
+pub fn led(n: i32) void {
+    out(7, n);
+}

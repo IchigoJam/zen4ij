@@ -1,0 +1,13 @@
+const ij = @import("std15.zen");
+
+export fn main(param: i32, ram: i32, rom: i32, divfunc: fn(u32, u32) callconv(.C) u64) u32 {
+    // NG!!
+    ij.putstr("a\n");
+    ij.putstr("ab\n");
+    ij.putstr("abc\n");
+    ij.putstr("abcd\n");
+    ij.putstr("abc\n");
+    ij.putstr("ab\n");
+    ij.putstr("a\n");
+    return 0;
+}

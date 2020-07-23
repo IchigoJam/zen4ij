@@ -1,0 +1,3 @@
+export fn main(param: i32, ram: i32, rom: i32, divfunc: fn(u32, u32) callconv(.C) u64) u32 {
+  return @truncate(u31, divfunc(6, 3));
+}

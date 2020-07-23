@@ -1,0 +1,11 @@
+const ij = @import("std15.zen");
+
+export fn main(param: i32) i32 {
+  while (true) {
+      ij.led(1);
+      ij.wait(10);
+      ij.led(0);
+      ij.wait(10);
+  }
+  return 0;
+}

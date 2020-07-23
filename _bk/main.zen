@@ -1,0 +1,10 @@
+//const builtin = @import("builtin");
+//pub fn panic(msg: []u8, _: ?*builtin.StackTrace) noreturn {
+//  while (true) {}
+//}
+
+export fn main(param: i32) i32 {
+  return param + 1;
+}
+
+// export const RESET_VECTOR: fn (i32) callconv(.C) i32 = main;
