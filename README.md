@@ -78,6 +78,10 @@ $ make
 ```
 Run on your IchigoJam rapidly!  
 
+## Limitation
+
+putstr doesn't show collect strings  
+
 ## License
 
 CC BY 4.0 http://ichigojam.net/  
