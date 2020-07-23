@@ -67,14 +67,16 @@ export fn main() i32 {
 
 ## How to use
 
-Install Zen language. https://zen-lang.org/  
-
-In the beginning. Edit settings on Makefile for your environment.  
+Install Zen language https://zen-lang.org/  
+Setup c4yj https://github.com/ichigojam/c4ij  
+Setup lpc21isp supported sector writing https://github.com/taisukef/lpc21isp  
+Edit settings on Makefile for your environment.  
+Edit src/main.zen. (examples in src)  
 
 ```
 $ make
 ```
-Run on your IchigoJam rapidly!
+Run on your IchigoJam rapidly!  
 
 ## License
 
