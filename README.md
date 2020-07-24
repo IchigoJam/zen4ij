@@ -3,15 +3,16 @@
 zen4ij - Zen language for IchigoJam!
 
 Let's make programs with Zen language on your PC!  
-This tool provide to convert IchigoJam BASIC to bin file.  
-* Only IchigoJam 1.4b9 or higher for LPC1114  
+This tool provide to convert IchigoJam BASIC to bin file.
+
+- Only IchigoJam 1.4b9 or higher for LPC1114
 
 see also  
-https://fukuno.jig.jp/2919  
+https://fukuno.jig.jp/2919
 
 ## Minimum example
 
-```
+```zen
 export fn main(param: i32) i32 {
   return param + 1;
 }
@@ -19,7 +20,7 @@ export fn main(param: i32) i32 {
 
 ## LED blink
 
-```
+```zen
 const ij = @import("std15.zen");
 
 export fn main(param: i32) i32 {
@@ -35,10 +36,14 @@ export fn main(param: i32) i32 {
 
 ## Kawakudari game
 
-```
+```zen
 const ij = @import("std15.zen");
 
-export fn main() i32 {
+comptime {
+    @export(main, .{ .name = "main", .linkage = .Strong, .section = ".main" });
+}
+
+pub fn main() callconv(.C) i32 {
     ij.cls();
     var x: i32 = 15;
     var score: i32 = 0;
@@ -49,12 +54,10 @@ export fn main() i32 {
         ij.putc('*');
         ij.putc(10);
         ij.wait(3);
-        const c = ij.inkey();
-        if (c == 28) {
-            x -= 1;
-        }
-        if (c == 29) {
-            x += 1;
+        switch (ij.inkey()) {
+            28 => x -= 1,
+            29 => x += 1,
+            else => {},
         }
         if (ij.scr(x, 5) != 0) {
             break;
@@ -71,17 +74,18 @@ Install Zen language https://zen-lang.org/
 Setup c4yj https://github.com/ichigojam/c4ij  
 Setup lpc21isp supported sector writing https://github.com/taisukef/lpc21isp  
 Edit settings on Makefile for your environment.  
-Edit src/main.zen. (examples in src)  
+Edit src/main.zen. (examples in src)
 
 ```
 $ make
 ```
-Run on your IchigoJam rapidly!  
+
+Run on your IchigoJam rapidly!
 
 ## Limitation
 
-putstr doesn't show collect strings  
+putstr doesn't show collect strings
 
 ## License
 
-CC BY 4.0 http://ichigojam.net/  
+CC BY 4.0 http://ichigojam.net/

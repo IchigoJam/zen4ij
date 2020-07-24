@@ -8,8 +8,17 @@ MEMORY {
   RAM (w)  : ORIGIN = 0x10000000, LENGTH = 1k
 }
 
+ENTRY(main);
+
 SECTIONS {
-   .text : {
-    KEEP(*(.main))
-  } > PROG
+	.text :
+	{
+		*(.text .text.*);
+	} > PROG
+
+	/* バックトレース出力時に使う */
+	.ARM.exidx :
+	{
+		*(.ARM.exidx.*);
+	} > PROG
 }

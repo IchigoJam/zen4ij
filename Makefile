@@ -11,11 +11,10 @@ all: build write
 
 build:
 	-mkdir ${DST}
-	#zen build-exe src/main.zen --linker-script memory.x -target thumb-freestanding-eabi -mcpu cortex-m0 --strip --emit asm --release-small
-	zen build-obj src/main.zen --name ${DST}/${NAME} -target thumb-freestanding-eabi -mcpu cortex-m0 --strip --release-small --emit asm
-	arm-none-eabi-gcc ${DST}/${NAME}.o -o ${DST}/${NAME}.axf -nostartfiles -mthumb -Tmemory.x
-	arm-none-eabi-objcopy -O ihex ${DST}/${NAME}.axf ${DST}/${NAME}.hex
-	arm-none-eabi-objcopy -O binary ${DST}/${NAME}.axf ${DST}/${NAME}.bin
+	zen build-exe src/main.zen --name ${DST}/${NAME} -target thumb-freestanding-eabi -mcpu cortex-m0 --strip --release-small --linker-script memory.x --emit asm
+	#/usr/local/opt/llvm/bin/llvm-objcopy -S ${DST}/${NAME} -g -O binary --only-section=.main ${DST}/${NAME}.bin
+	arm-none-eabi-objcopy -O ihex ${DST}/${NAME} ${DST}/${NAME}.hex
+	arm-none-eabi-objcopy -O binary ${DST}/${NAME} ${DST}/${NAME}.bin
 	ls -l ${DST}/${NAME}.bin
 
 clean:
