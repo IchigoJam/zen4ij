@@ -1,0 +1,6 @@
+const ij = @import("std15.zen");
+
+export fn main(param: i32, ram: i32, rom: i32, divfunc: fn(u32, u32) callconv(.C) u64) u32 {
+    ij.putstr("aaaaaaa");
+    return 0;
+}

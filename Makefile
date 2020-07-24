@@ -3,6 +3,8 @@
 BAS2BIN="../../c/bas2bin_for_IchigoJam/bas2bin"
 LPC21ISP="../../c/lpc21isp_197k/lpc21isp"
 USBSERIAL="/dev/tty.SLAB_USBtoUART"
+OBJCOPY=arm-none-eabi-objcopy
+#OBJCOPY=/usr/local/opt/llvm/bin/llvm-objcopy
 
 DST=dst
 NAME=zen4ij
@@ -12,9 +14,8 @@ all: build write
 build:
 	-mkdir ${DST}
 	zen build-exe src/main.zen --name ${DST}/${NAME} -target thumb-freestanding-eabi -mcpu cortex-m0 --strip --release-small --linker-script memory.x --emit asm
-	#/usr/local/opt/llvm/bin/llvm-objcopy -S ${DST}/${NAME} -g -O binary --only-section=.main ${DST}/${NAME}.bin
-	arm-none-eabi-objcopy -O ihex ${DST}/${NAME} ${DST}/${NAME}.hex
-	arm-none-eabi-objcopy -O binary ${DST}/${NAME} ${DST}/${NAME}.bin
+	#${OBJCOPY} -S ${DST}/${NAME} -g -O binary --only-section=.text ${DST}/${NAME}.bin
+	${OBJCOPY} -S ${DST}/${NAME} -g -O binary --remove-section=.ARM.exidx ${DST}/${NAME}.bin
 	ls -l ${DST}/${NAME}.bin
 
 clean:
@@ -31,3 +32,6 @@ disasm:
 	arm-none-eabi-objdump -D -bbinary -marm -Mforce-thumb2 $(DST)/${NAME}.bin
 	#objdump -D -marm -Mforce-thumb2 $(DST)/${NAME}.axf
 	wc -c < $(DST)/${NAME}.bin
+
+sections:
+	arm-none-eabi-objdump -x $(DST)/${NAME}

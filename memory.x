@@ -15,6 +15,10 @@ SECTIONS {
 	{
 		*(.text .text.*);
 	} > PROG
+	.rodata :
+	{
+		*(.rodata);
+	} > PROG
 
 	/* バックトレース出力時に使う */
 	.ARM.exidx :
