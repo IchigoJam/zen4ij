@@ -1,6 +1,10 @@
 const ij = @import("std15.zen");
 
-export fn main() i32 {
+comptime {
+    @export(main, .{ .name = "main", .linkage = .Strong, .section = ".main" });
+}
+
+pub fn main() callconv(.C) i32 {
     ij.cls();
     var x: i32 = 15;
     var score: i32 = 0;
@@ -11,12 +15,10 @@ export fn main() i32 {
         ij.putc('*');
         ij.putc(10);
         ij.wait(3);
-        const c = ij.inkey();
-        if (c == 28) {
-            x -= 1;
-        }
-        if (c == 29) {
-            x += 1;
+        switch (ij.inkey()) {
+            28 => x -= 1,
+            29 => x += 1,
+            else => {},
         }
         if (ij.scr(x, 5) != 0) {
             break;
