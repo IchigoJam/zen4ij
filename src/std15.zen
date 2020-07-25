@@ -10,10 +10,16 @@ pub fn sin(x: i32) i32 {
     return f(x);
 }
 
-pub fn putc(x: u8) void {
+pub fn putc(x: anytype) void {
     const addr = @intToPtr(*u16, 0xC4);
     const f = @intToPtr(fn(u8) void, addr.*);
-    f(x);
+    if (@typeInfo(@TypeOf(x)) != .Struct) {
+        f(x);
+    } else {
+        inline for (x) |c| {
+            f(c);
+        }
+    }
 }
 
 pub fn putnum(x: i32) void {
