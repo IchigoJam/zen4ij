@@ -13,7 +13,7 @@ https://fukuno.jig.jp/2919
 ## Minimum example
 
 ```zen
-export fn main(param: i32) i32 {
+export fn main(param: i32) callconv(.C) i32 {
   return param + 1;
 }
 ```
@@ -39,11 +39,7 @@ export fn main(param: i32) i32 {
 ```zen
 const ij = @import("std15.zen");
 
-comptime {
-    @export(main, .{ .name = "main", .linkage = .Strong, .section = ".main" });
-}
-
-pub fn main() callconv(.C) i32 {
+export fn main() callconv(.C) i32 {
     ij.cls();
     var x: i32 = 15;
     var score: i32 = 0;
@@ -51,8 +47,7 @@ pub fn main() callconv(.C) i32 {
         ij.locate(x, 5);
         ij.putc(236);
         ij.locate(ij.rnd(32), 23);
-        ij.putc('*');
-        ij.putc(10);
+        ij.putc(.{'*', 10});
         ij.wait(3);
         switch (ij.inkey()) {
             28 => x -= 1,
