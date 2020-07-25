@@ -8,8 +8,7 @@ export fn main() callconv(.C) i32 {
         ij.locate(x, 5);
         ij.putc(236);
         ij.locate(ij.rnd(32), 23);
-        ij.putc('*');
-        ij.putc(10);
+        ij.putc(.{'*', 10});
         ij.wait(3);
         switch (ij.inkey()) {
             28 => x -= 1,
