@@ -1,0 +1,52 @@
+// 100 byte Code Golf version of main.zen
+// Although you might not write zen code in this way,
+// this is an extreme example of how far you might go.
+// It should beat the best C language implementation.
+
+const ij = @import("std15.zen");
+
+const LEFT = 28;
+const RIGHT = 29;
+
+fn app() i32 {
+    ij.cls();
+    var score: i32 = 0;
+    var x: i32 = 15;
+    const putc = @intToPtr(fn(u8) void, @intToPtr(*u16, 0xC4).*);
+    const locate = @intToPtr(fn(i32, i32) void, @intToPtr(*u16, 0xCE).*);
+    while (true) {
+        locate(x, 5);
+        putc(236);
+        locate(ij.rnd(32), 23);
+        putc('*');
+        putc(10);
+        ij.wait(3);
+        switch (ij.inkey()) {
+            LEFT => x -= 1,
+            RIGHT => x += 1,
+            else => {},
+        }
+        if (ij.scr(x, 5) != 0) {
+            break;
+        }
+        score += 1;
+    }
+    return score;
+}
+
+export fn main() callconv(.Naked) noreturn {
+    // imitate -fomit-frame-pointer 
+    asm volatile ("push {r3, r4, r5, r6, r7, lr}");
+    
+    //call application
+    const score = @call(.always_inline, null, app, .{});
+
+    //return score
+    asm volatile (
+        \\movs r0, %[score]
+        \\pop {r3, r4, r5, r6, r7, pc}
+        : 
+        : [score] "r" (score)
+    );
+    unreachable;
+}
