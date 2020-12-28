@@ -1,4 +1,4 @@
-/* c4ij memory definitions */
+/* zen4ij memory definitions */
 
 MEMORY {
   /* PROG: 512byte no #700-#8FF, 3kbyte on sector6, or 7k full */
@@ -20,7 +20,7 @@ SECTIONS {
 		*(.rodata);
 	} > PROG
 
-	/* バックトレース出力時に使う */
+	/* for backtrace output */
 	.ARM.exidx :
 	{
 		*(.ARM.exidx.*);
