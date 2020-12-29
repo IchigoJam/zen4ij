@@ -5,7 +5,7 @@ zen4ij - Zen language for IchigoJam!
 Let's make programs with Zen language on your PC!  
 This tool provide to convert IchigoJam BASIC to bin file.
 
-- Only IchigoJam 1.4b9 or higher for LPC1114
+- Only IchigoJam 1.4b9 or higher for LPC1114 or IchigoJam R
 
 see also  
 https://fukuno.jig.jp/2919
@@ -76,6 +76,12 @@ $ make
 ```
 
 Run on your IchigoJam rapidly!
+
+## for RISC-V
+
+```
+$ make buildr
+```
 
 ## Limitation
 
