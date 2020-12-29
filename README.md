@@ -9,6 +9,7 @@ This tool provide to convert IchigoJam BASIC to bin file.
 
 see also  
 https://fukuno.jig.jp/2919
+https://fukuno.jig.jp/3077
 
 ## Minimum example
 
@@ -77,6 +78,12 @@ $ make
 
 Run on your IchigoJam rapidly!
 
+## disassemble
+
+```
+$ make disasm
+```
+
 ## for RISC-V
 
 ```
@@ -89,4 +96,4 @@ putstr doesn't show collect strings
 
 ## License
 
-CC BY 4.0 http://ichigojam.net/
+CC BY 4.0 https://ichigojam.net/
